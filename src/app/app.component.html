@@ -1,0 +1,26 @@
+<ng-container *ngIf="entity$ | async; let entity">
+  <div class="loader" [hidden]="!entity.loading">
+    <div class="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <button (click)="discover()">Discover</button>
+  <br />
+  <meter
+    [hidden]="entity.percentage === null"
+    [value]="entity.percentage"
+  ></meter>
+
+  <ul>
+    <li *ngFor="let element of entity.elements">{{ element.name }}</li>
+  </ul>
+
+  <form (ngSubmit)="add()">
+    <input type="text" [formControl]="name" />
+    <button type="button">Add</button>
+  </form>
+</ng-container>
